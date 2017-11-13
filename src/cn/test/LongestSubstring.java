@@ -27,6 +27,12 @@ public class LongestSubstring {
     return max;
   }
 
+  /**
+   * TLE.
+   * 
+   * @param s
+   * @return
+   */
   public static int gen(String s) {
 
     List<Integer> lst = new ArrayList<>();
