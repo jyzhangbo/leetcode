@@ -7,7 +7,7 @@ package cn.test;
 public class LongestPalindromic {
 
   public static void main(String[] args) {
-    System.out.println(longestPalindrome1("ababd"));
+    System.out.println(longestPalindrome1("aaabbaaa"));
   }
 
 
