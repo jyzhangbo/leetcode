@@ -31,7 +31,7 @@ import cn.jyzhangbo.tools.NodeTools;
 public class Solution_2 {
 
     public static void main(String[] args) {
-        System.out.println(addTwoNumbers_2(NodeTools.init(9,9,9,9,9,9,9), NodeTools.init(9,9,9,9)));
+        System.out.println(addTwoNumbers(NodeTools.init(9,9,9,9,9,9,9), NodeTools.init(9,9,9,9)));
     }
 
     /**
@@ -74,9 +74,15 @@ public class Solution_2 {
         ListNode head = null, tail = null;
         int temp = 0;
         while (l1 != null || l2 != null){
-            int a = l1 != null ? l1.val : 0;
-            int b = l2 != null ? l2.val : 0;
-            int sum = a + b + temp;
+            int sum = temp;
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
 
             if (head == null) {
                 head = tail = new ListNode(sum % 10);
@@ -84,14 +90,6 @@ public class Solution_2 {
                 tail.next = new ListNode(sum % 10);
                 tail = tail.next;
             }
-
-            if (l1 != null) {
-                l1 = l1.next;
-            }
-            if (l2 != null) {
-                l2 = l2.next;
-            }
-
             temp = sum / 10;
         }
 
