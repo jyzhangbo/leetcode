@@ -12,19 +12,17 @@ public class NodeTools {
         if (vals.length == 0) {
             return new ListNode();
         }
+        ListNode head = null, tail = null;
 
-        ListNode dummyNode = new ListNode();
-        ListNode tempNode = new ListNode(vals[0]);
-
-        dummyNode.next = tempNode;
-
-        for (int i = 1; i < vals.length; i++) {
-            ListNode node = new ListNode(vals[i]);
-            tempNode.next = node;
-            tempNode = tempNode.next;
+        for (int i = 0; i < vals.length; i++) {
+            if (head == null) {
+                head = tail = new ListNode(vals[i]);
+            } else {
+                tail.next = new ListNode(vals[i]);
+                tail = tail.next;
+            }
         }
-
-        return dummyNode.next;
+        return head;
     }
 
     public static void main(String[] args) {

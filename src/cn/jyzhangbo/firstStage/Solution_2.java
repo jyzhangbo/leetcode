@@ -31,43 +31,74 @@ import cn.jyzhangbo.tools.NodeTools;
 public class Solution_2 {
 
     public static void main(String[] args) {
-        System.out.println(addTwoNumbers(NodeTools.init(9,9,9,9,9,9,9), NodeTools.init(9,9,9,9)));
+        System.out.println(addTwoNumbers_2(NodeTools.init(9,9,9,9,9,9,9), NodeTools.init(9,9,9,9)));
     }
 
+    /**
+     * 递归计算
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode addTwoNumbers_2(ListNode l1, ListNode l2) {
+        return recursion(l1, l2, 0);
+    }
+
+    public static ListNode recursion(ListNode l1, ListNode l2, int temp) {
+        if (l1 == null && l2 == null && temp == 0) {
+            return null;
+        }
+        int sum = temp;
+        if (l1 != null) {
+            sum += l1.val;
+            l1 = l1.next;
+        }
+        if (l2 != null) {
+            sum += l2.val;
+            l2 = l2.next;
+        }
+
+        ListNode node = new ListNode(sum % 10);
+        node.next = recursion(l1, l2, sum /10);
+
+        return node;
+    }
+
+    /**
+     * 正常思路
+     * @param l1
+     * @param l2
+     * @return
+     */
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode dummy = new ListNode();
-        ListNode result = new ListNode();
-        dummy.next = result;
+        ListNode head = null, tail = null;
         int temp = 0;
-        int sum = 0, a = 0, b = 0;
-        while (l1 != null || l2 != null || temp != 0){
-            if (l1 != null && l2 != null) {
-                a = l1.val;
-                b = l2.val;
-                l1 = l1.next;
-                l2 = l2.next;
-            } else if(l1 == null && l2 != null) {
-                a = 0;
-                b = l2.val;
-                l2 = l2.next;
-            } else if(l1 != null && l2 == null) {
-                b = 0;
-                a = l1.val;
-                l1 = l1.next;
+        while (l1 != null || l2 != null){
+            int a = l1 != null ? l1.val : 0;
+            int b = l2 != null ? l2.val : 0;
+            int sum = a + b + temp;
+
+            if (head == null) {
+                head = tail = new ListNode(sum % 10);
             } else {
-                a = 0;
-                b = 0;
+                tail.next = new ListNode(sum % 10);
+                tail = tail.next;
             }
 
-            sum = (a + b + temp) % 10;
-            temp = (a + b + temp) / 10;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
 
-            ListNode node = new ListNode(sum);
-            result.next = node;
-
-            result = result.next;
-
+            temp = sum / 10;
         }
-        return dummy.next.next;
+
+        if (temp > 0) {
+            tail.next = new ListNode(temp);
+        }
+
+        return head;
     }
 }
