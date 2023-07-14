@@ -34,10 +34,14 @@ import java.util.List;
 public class Solution_6 {
 
     public static void main(String[] args) {
-        System.out.println(convert("PAYPALISHIRING", 4));
+        System.out.println(convert("AB", 1));
     }
 
     public static String convert(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
+
         List<StringBuffer> temp = new ArrayList<>();
         for (int i =0 ; i< numRows; i++) {
             temp.add(new StringBuffer());
