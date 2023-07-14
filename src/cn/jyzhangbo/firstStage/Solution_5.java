@@ -24,10 +24,32 @@ public class Solution_5 {
         System.out.println(longestPalindrome("babad"));
     }
 
+    /**
+     * 动态规划
+     *
+     * @param s
+     * @return
+     */
     public static String longestPalindrome(String s) {
-        for (int i = 0; i < s.length(); i++) {
+        char[] chars = s.toCharArray();
+        boolean f[][] =new boolean[chars.length][chars.length];
+        int max = 0;
+        int begin = 0;
 
+        for (int i = 0; i< s.length(); i++) {
+            f[i][i] = true;
         }
-        return null;
+
+        for (int j = 1; j < s.length(); j++) {
+            for (int i = 0; i < j; i++) {
+                f[i][j] = (chars[i] == chars[j]) && ((j - i) > 2 || f[i+1][j-1]);
+
+                if (f[i][j] && (j - i + 1) > max) {
+                    max = j -i + 1;
+                    begin = i;
+                }
+            }
+        }
+        return s.substring(begin, begin + max);
     }
 }
