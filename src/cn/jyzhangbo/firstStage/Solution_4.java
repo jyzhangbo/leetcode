@@ -27,8 +27,8 @@ package cn.jyzhangbo.firstStage;
 public class Solution_4 {
 
     public static void main(String[] args) {
-        int[] a= {2,3,4, 8, 9};
-        int[] b = {1,2};
+        int[] a= {1};
+        int[] b = {2,3,4,5,6};
         System.out.println(findMedianSortedArrays(a, b));
     }
 
@@ -54,6 +54,6 @@ public class Solution_4 {
         }
         int temp1 = (i + k/2 - 1) < nums1.length ? nums1[i + k/2 - 1] : Integer.MAX_VALUE;
         int temp2 = (j + k/2 - 1) < nums2.length ? nums2[j + k/2 - 1] : Integer.MAX_VALUE;
-        return temp1 > temp2 ? findK(nums1, nums2, i, j + k/2, k - k/2) : findK(nums1, nums2, i + k/2, j, k - k/2);
+        return temp1 > temp2 ? findK(nums1, nums2, i, j + k/2 + 1, k - k/2) : findK(nums1, nums2, i + k/2, j, k - k/2);
     }
 }

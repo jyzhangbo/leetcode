@@ -21,7 +21,7 @@ package cn.jyzhangbo.firstStage;
 public class Solution_5 {
 
     public static void main(String[] args) {
-        System.out.println(longestPalindrome("babad"));
+        System.out.println(longestPalindrome("bb"));
     }
 
     /**
@@ -37,15 +37,12 @@ public class Solution_5 {
 
         char[] chars = s.toCharArray();
         boolean f[][] =new boolean[chars.length][chars.length];
-        int max = 0;
+        int max = 1;
         int begin = 0;
 
-        for (int i = 0; i< s.length(); i++) {
-            f[i][i] = true;
-        }
-        for (int j = 2; j < s.length(); j++) {
+        for (int j = 1; j < s.length(); j++) {
             for (int i = 0; i < j; i++) {
-                f[i][j] = (chars[i] == chars[j]) && ((j - i) < 2 || f[i+1][j-1]);
+                f[i][j] = (chars[i] == chars[j]) && ((j - i) <= 2 || f[i+1][j-1]);
 
                 if (f[i][j] && (j - i + 1) > max) {
                     max = j -i + 1;
