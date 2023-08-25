@@ -23,10 +23,22 @@ import cn.jyzhangbo.tools.NodeTools;
 public class Solution_19 {
 
     public static void main(String[] args) {
-        System.out.println(removeNthFromEnd(NodeTools.init(2,3,4), 1));
+        System.out.println(removeNthFromEnd(NodeTools.init(1,2,3,4,5), 2));
     }
 
     public static ListNode removeNthFromEnd(ListNode head, int n) {
-       return null;
+        ListNode dummy = new ListNode(0, head);
+        ListNode fast = head;
+        for (int i = 0 ; i < n; i++) {
+            fast = fast.next;
+        }
+        ListNode slow = dummy;
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+        return dummy.next;
     }
 }

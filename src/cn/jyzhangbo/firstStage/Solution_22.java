@@ -1,5 +1,6 @@
 package cn.jyzhangbo.firstStage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,10 +21,27 @@ import java.util.List;
 public class Solution_22 {
 
     public static void main(String[] args) {
-        System.out.println(generateParenthesis(1));
+        System.out.println(generateParenthesis(3));
     }
 
     public static List<String> generateParenthesis(int n)  {
-       return null;
+        List<String> result = new ArrayList<>();
+        handle(result,"",n,n);
+        return result;
+    }
+
+    public static void handle(List<String> result, String s, int l, int r) {
+        if (l ==0 && r==0){
+            result.add(s);
+            return;
+        }
+        if (l == r) {
+            handle(result, s + "(", l-1,r);
+        } else if (l < r) {
+            if (l > 0) {
+                handle(result, s + "(", l-1,r);
+            }
+            handle(result, s + ")", l, r -1);
+        }
     }
 }

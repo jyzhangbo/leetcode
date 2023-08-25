@@ -1,5 +1,10 @@
 package cn.jyzhangbo.firstStage;
 
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 /**
  * 20. 有效的括号
  * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
@@ -24,10 +29,26 @@ package cn.jyzhangbo.firstStage;
 public class Solution_20 {
 
     public static void main(String[] args) {
-        System.out.println(isValid("abc"));
+        System.out.println(isValid("()[]{}"));
     }
 
     public static boolean isValid(String s) {
-       return false;
+        char[] chars = s.toCharArray();
+        Map<Character,Character> temp = new HashMap<>();
+        temp.put('(', ')');
+        temp.put('[', ']');
+        temp.put('{', '}');
+        Deque<Character> deque = new LinkedList();
+
+        for (int i = 0; i<chars.length; i++) {
+            if (temp.containsKey(chars[i])) {
+                deque.push(chars[i]);
+            } else {
+                if (deque.isEmpty() || temp.get(deque.pop()) != chars[i]) {
+                    return false;
+                }
+            }
+        }
+        return deque.isEmpty();
     }
 }

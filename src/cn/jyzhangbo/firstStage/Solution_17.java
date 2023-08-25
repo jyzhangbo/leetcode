@@ -1,6 +1,9 @@
 package cn.jyzhangbo.firstStage;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 17. 电话号码的字母组合
@@ -30,6 +33,32 @@ public class Solution_17 {
     }
 
     public static List<String> letterCombinations(String digits)  {
-       return null;
+        Map<Character, String> temp = new HashMap<>();
+        temp.put('2', "abc");
+        temp.put('3', "def");
+        temp.put('4', "ghi");
+        temp.put('5', "jkl");
+        temp.put('6', "mno");
+        temp.put('7', "pqr");
+        temp.put('8', "stu");
+        temp.put('9', "vwx");
+        temp.put('0', "yz");
+        List<String> result = new ArrayList<>();
+        handle(temp, result, 0, new StringBuilder(), digits);
+        return result;
+    }
+
+    public static void handle(Map<Character, String> temp, List<String> result, int index, StringBuilder stringBuilder, String digits) {
+        if (index == digits.length()) {
+            result.add(stringBuilder.toString());
+        } else {
+            char c = digits.charAt(index);
+            String s = temp.get(c);
+            for (int i = 0; i < s.length(); i++) {
+                stringBuilder.append(s.charAt(i));
+                handle(temp, result, index + 1, stringBuilder, digits);
+                stringBuilder.deleteCharAt(index);
+            }
+        }
     }
 }
